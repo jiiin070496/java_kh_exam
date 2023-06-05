@@ -1,12 +1,15 @@
 package com.kh.practice.snack.model.vo;
 
-public class Snack {
+import java.io.Serializable;
 
-		private String kind; //종류
-		private String name; //이름
-		private String flavor; //맛
-		private int numOf; //개수
-		private int price; //가격
+public class Snack implements Serializable {
+	private static final long serialVersionUID = -6423919775137290062L; 
+		
+	private String kind; //종류
+	private String name; //이름
+	private String flavor; //맛
+	private int numOf; //개수
+	private int price; //가격
 		
 		public Snack() {
 		}
