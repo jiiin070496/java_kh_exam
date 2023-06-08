@@ -1,9 +1,13 @@
 package com.kh.practice.list.music.model.vo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Music {
+public class Music implements Comparable<Object>, Serializable{
 
+	private static final long serialVersionUID = -231725129446354999L;
+	
+	
 	private String title;
 	private String singer;
 	
@@ -54,12 +58,13 @@ public class Music {
 		return Objects.equals(singer, other.singer) && Objects.equals(title, other.title);
 		//super(Object).equals ==  Objects.equals
 	}
-	
+
+	@Override
 	public int compareTo(Object o) {
-		int result = 0;
-		//TODO
-		return result;
+		int result = this.singer.compareTo(((Music)o).getSinger());//Controller의 sort
+		return result * -1;
 	}
+	
 	
 	
 }
