@@ -1,5 +1,13 @@
 package com.kh.practice.list.music.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,20 +17,37 @@ import com.kh.practice.list.music.model.vo.Music;
 
 public class MusicController {
 	private List<Music> list = new ArrayList<Music>();
-
+	
+	@SuppressWarnings("unchecked")
 	public MusicController() {
-		//list에 초기 곡 10곡 미리 입력
-		list.add(new Music("aa", "aaa"));
-		list.add(new Music("bb", "aab"));
-		list.add(new Music("cc", "aac"));
-		list.add(new Music("dd", "aad"));
-		list.add(new Music("ee", "aae"));
-		list.add(new Music("ff", "aaf"));
-		list.add(new Music("gg", "aag"));
-		list.add(new Music("as", "aas"));
-		list.add(new Music("ax", "aax"));
-		list.add(new Music("az", "aaz"));
+		//music.txt 파일에서 읽어서 list에 추가하여 초기화 끝
+		String filePath = "Music.txt";
+		try(ObjectInputStream ois 
+				= new ObjectInputStream(new BufferedInputStream(new FileInputStream(filePath)));
+		) {
+			list = (List<Music>) ois.readObject();
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+			e.printStackTrace();
+		}catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
+		
+		//list에 초기 곡 10곡 미리 입력
+//		list.add(new Music("aa", "aaa"));
+//		list.add(new Music("bb", "aab"));
+//		list.add(new Music("cc", "aac"));
+//		list.add(new Music("dd", "aad"));
+//		list.add(new Music("ee", "aae"));
+//		list.add(new Music("ff", "aaf"));
+//		list.add(new Music("gg", "aag"));
+//		list.add(new Music("as", "aas"));
+//		list.add(new Music("ax", "aax"));
+//		list.add(new Music("az", "aaz"));
+	
+	
 	public int addList(Music music) {
 		int result = 0; // 0:추가실패, 1:추가성공
 		if (list.add(music)) { // 추가
@@ -150,6 +175,15 @@ public class MusicController {
 		
 		
 		
+		try(ObjectOutputStream oos 
+				= new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(filePath)));
+		){
+			oos.writeObject(list);
+			oos.flush();
+			result = 1;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 

@@ -48,7 +48,7 @@ public class MusicView {
 			// 정상 입력 경우
 			switch (menu) {
 
-			// TODO case 0: saveFile(); break;
+			case 0: saveFile(); break;
 			case 1:
 				addList();
 				break;
@@ -197,6 +197,15 @@ public class MusicView {
 	}
 
 	public void saveFile() {
-		// TODO
+		System.out.println("****** 파일에 저장 ******");
+		System.out.println("저장할 파일경로를 작성해주세요.");
+		String filePath = "Music.txt";
+		int result = mc.saveFile(filePath);
+		if(result > 0) {
+			System.out.println("저장성공");
+		}else {
+			System.out.println("저장실패");
+		}
+			
 	}
 }
