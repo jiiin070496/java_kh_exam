@@ -4,11 +4,11 @@ import com.kh.practice.chap02.model.vo.GalaxyNote9;
 import com.kh.practice.chap02.model.vo.SmartPhone;
 import com.kh.practice.chap02.model.vo.V40;
 
-public class PhoneController {
+public abstract class PhoneController {
 	
 	private String[] result = new String[2];
 	
-	public String method() {
+	public abstract String method();
 		
 		SmartPhone[] phone = new SmartPhone[2];
 		phone[0] = new GalaxyNote9();
